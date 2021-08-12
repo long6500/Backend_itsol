@@ -20,13 +20,13 @@ public class EmployeeEntity {
     private String phone;
     private String email;
     private String type;
-    private String idcard;
+    private String personalid;
     private String address;
     private String education;
     private String school;
     private String faculty;
     private String course;
-    private Date join;
+    private Date timejoin;
     private boolean status;
 
     @Id
@@ -149,15 +149,18 @@ public class EmployeeEntity {
         this.type = type;
     }
 
+
+
     @Basic
     @Column(name = "IDCARD", nullable = false, length = 50)
-    public String getIdcard() {
-        return idcard;
+    public String getPersonalid() {
+        return personalid;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
+    public void setPersonalid(String personalid) {
+        this.personalid = personalid;
     }
+
 
     @Basic
     @Column(name = "ADDRESS", nullable = false, length = 100)
@@ -211,12 +214,12 @@ public class EmployeeEntity {
 
     @Basic
     @Column(name = "JOIN", nullable = false)
-    public Date getJoin() {
-        return join;
+    public Date getTimejoin() {
+        return timejoin;
     }
 
-    public void setJoin(Date join) {
-        this.join = join;
+    public void setTimejoin(Date join) {
+        this.timejoin = join;
     }
 
     @Basic
@@ -244,13 +247,13 @@ public class EmployeeEntity {
         this.phone = phone;
         this.email = email;
         this.type = type;
-        this.idcard = idcard;
+        this.personalid = idcard;
         this.address = address;
         this.education = education;
         this.school = school;
         this.faculty = faculty;
         this.course = course;
-        this.join = join;
+        this.timejoin = join;
         this.status = status;
     }
 }
