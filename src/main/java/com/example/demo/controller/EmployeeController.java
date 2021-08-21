@@ -71,7 +71,7 @@ public class EmployeeController {
 //    @GetMapping("/getById/{id}")
 //    public ResponseEntity<EmployeeEntity> findById(@PathVariable Long id) {
 //        System.err.println("Find by ID!");
-//        Optional<EmployeeEntity> employee = employeeRepository.findById(id);
+//        Optional<EmployeeEntity> emplordyee = employeeRepository.findById(id);
 //        return new ResponseEntity<>(employee.get(), HttpStatus.OK);
 //    }
 

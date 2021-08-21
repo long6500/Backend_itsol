@@ -1,13 +1,12 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "EMPLOYEE", schema = "ITSOLL")
-public class EmployeeEntity {
+public class EmployeeEntity implements Serializable {
     private long id;
     private String firstname;
     private String lastname;
@@ -148,7 +147,6 @@ public class EmployeeEntity {
     public void setType(String type) {
         this.type = type;
     }
-
 
 
     @Basic
