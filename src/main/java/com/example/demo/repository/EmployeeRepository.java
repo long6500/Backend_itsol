@@ -18,6 +18,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     Boolean existsByAddress(String address);
 
+    EmployeeEntity findByUserName(String username);
+
     //    select * from Employee u where u.lastname like '%min%'
 //    @Query("select u from EmployeeEntity u where u.lastname like '%?1%' ")
 //    List<EmployeeEntity> findByAddressContaining(String address);
@@ -33,4 +35,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     @Query("select t from EmployeeEntity t where t.id = ?1")
     EmployeeEntity findByIdd(Long id);
+
+    @Query("select t from EmployeeEntity t where t.userName = ?1 and t.password = ?2")
+    EmployeeEntity findByUserNameAndPassword(String UserName,String Password);
+
 }

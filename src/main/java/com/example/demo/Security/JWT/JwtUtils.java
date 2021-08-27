@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class JWT {
-    private static final Logger logger = LoggerFactory.getLogger(JWT.class);
+public class JwtUtils {
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
     @Value("${bezkoder.app.jwtSecret}")
     private String jwtSecret;
     @Value("${bezkoder.app.jwtExpirationMs}")
     private long jwtExpirationMs;
 
-    public String CreateToken(Authentication authentication) {
+    public String generateJwtToken(Authentication authentication) {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(customUserDetails.getUsername())
@@ -29,7 +29,11 @@ public class JWT {
     }
 
     public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     public boolean validateJwtToken(String authToken) {
