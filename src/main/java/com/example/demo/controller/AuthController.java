@@ -5,6 +5,9 @@ import com.example.demo.Security.Service.CustomUserDetails;
 import com.example.demo.Security.Service.CustomUserDetailsService;
 import com.example.demo.message.request.LoginRequest;
 import com.example.demo.message.response.JwtResponse;
+import com.example.demo.model.EmployeeEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -28,14 +32,20 @@ public class AuthController {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
-    @GetMapping("/signin")
-    public String login() {
-        return "authen sucessfully";
-    }
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
-//    @PostMapping("/signin")
+
+//    Basic-security
+//    @GetMapping("/signin")
+//    public String login() {
+//        System.err.println("CHAY VAO DAY");
+//        return "authen sucessfully";
+//    }
+
+//    1
+//    @GetMapping("/signin")
 //    public EmployeeEntity basicauth() {
-//        return usersService.getUserLogin();
+//        return customUserDetailsService.getUserLogin();
 //    }
 
 //    khong dung security
@@ -45,7 +55,7 @@ public class AuthController {
 //        String tempPass = user.getPassword();
 //        EmployeeEntity userObj = null;
 //        if (tempUsername != null && tempPass != null) {
-//            userObj = usersService.fetchUserByUserNameAndPassword(tempUsername, tempPass);
+//            userObj = customUserDetailsService.fetchUserByUserNameAndPassword(tempUsername, tempPass);
 //        }
 //        if (userObj == null) {
 //            throw new Exception("Bad Credentials");
@@ -53,25 +63,28 @@ public class AuthController {
 //        return userObj;
 //    }
 
-    public ResponseEntity authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getEmployee().getId(),
-                userDetails.getEmployee().getUserName(),
-                userDetails.getEmployee().getRole()));
-
-    }
-
-//    @PostMapping("/signin")
-//    public Principal login(Principal principal) {
-////        logger.info("user logged " + principal);
-//        return principal;
+//    @GetMapping("/signin")
+//    public ResponseEntity authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+//        System.err.println("CHAY VAO DAY");
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        String jwt = jwtUtils.generateJwtToken(authentication);
+//        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+//        return ResponseEntity.ok(new JwtResponse(jwt,
+//                userDetails.getEmployee().getId(),
+//                userDetails.getEmployee().getUserName(),
+//                userDetails.getEmployee().getRole()));
+//
 //    }
+
+//    2
+    @GetMapping("/signin")
+    public Principal login(Principal principal) {
+        logger.info("user logged " + principal);
+        return principal;
+    }
 
 
 }

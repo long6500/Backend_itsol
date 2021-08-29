@@ -9,10 +9,6 @@ public class JwtResponse {
     private String userName;
     private String roles;
 
-//    public JwtResponse() {
-//    }
-
-
     public JwtResponse(String token, Long id, String userName, String roles) {
         this.token = token;
         this.id = id;
@@ -35,7 +31,6 @@ public class JwtResponse {
     public void setType(String type) {
         this.type = type;
     }
-
 
     public String getUserName() {
         return userName;
